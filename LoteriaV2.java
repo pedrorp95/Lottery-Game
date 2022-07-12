@@ -4,13 +4,12 @@ public class LoteriaV2 {
     static double cartera=0.0;
     static int cantidadBoletos = 0;
     static int BoletosLoteria[];
-    static int BoletosLoteriaCopia[];
     public static void main(String[] args) {
         //Variables locales
-        Menu(BoletosLoteria);
+        Menu();
     }
 
-    public static void Menu (int BoletosLoteria[]){
+    public static void Menu (){
         int opcionMenu = 0;
         do {
             System.out.println("Menu");
@@ -30,13 +29,13 @@ public class LoteriaV2 {
                     cartera = IngresoSaldo();
                     break;
                 case 2:
-                    ConsultarSaldo(cartera);
+                    ConsultarSaldo();
                     break;
                 case 3:
-                CompraBoletosLoteria(BoletosLoteria,cartera, cantidadBoletos);
+                    CompraBoletosLoteria();
                     break;
                 case 4:
-                    ConsultaBoletosLoteria(BoletosLoteria);
+                    ConsultaBoletosLoteria();
                     break;
                 default:
                     break;
@@ -50,20 +49,18 @@ public class LoteriaV2 {
         return cartera;
     }
 
-    public static void ConsultarSaldo(double cartera){
+    public static void ConsultarSaldo(){
         System.out.println("Su cartera es de: "+cartera);
     }
 
-    public static void CompraBoletosLoteria(int BoletosLoteria[],double cartera, int cantidadBoletos){
+    public static void CompraBoletosLoteria(){
         double compra=0;
         int aleatorio;
 
         System.out.println("¿Cuántos boletos quieres comprar?");
         cantidadBoletos = TecladoInt();
 
-        //ARRAY
         BoletosLoteria =new int [cantidadBoletos];
-
         if (cartera >=5) {
             for (int i = 0; i < cantidadBoletos; i++) {
                 aleatorio=(((int)Math.floor(100000*(Math.random())))); //Numeros de 0 a 99.999;
@@ -71,6 +68,7 @@ public class LoteriaV2 {
                 System.out.print(BoletosLoteria[i]);
                 System.out.println("");
             }
+
             compra = cartera- (cantidadBoletos*5);
             cartera = compra;
         }
@@ -78,13 +76,12 @@ public class LoteriaV2 {
         System.out.println("Cartera minima de 5$");
     }
 
-    public static void ConsultaBoletosLoteria(int BoletosLoteria[]){
+    public static void ConsultaBoletosLoteria(){
         System.out.println("Sus boletos de loteria son: ");
         for (int i = 0; i < BoletosLoteria.length; i++) {
-            System.out.print(i);
+            System.out.println(BoletosLoteria[i]);
         }
     }
-
 
     public static int TecladoInt(){
         Scanner sc=new Scanner(System.in);
