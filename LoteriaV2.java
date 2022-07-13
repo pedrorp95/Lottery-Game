@@ -1,11 +1,15 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
 public class LoteriaV2 {
     //Variables globales
     static double cartera=0.0;
     static int cantidadBoletos = 0;
     static int BoletosLoteria[];
+    static ArrayList<Integer> ListaBoletos = new ArrayList<Integer>();
+    
+    
     public static void main(String[] args) {
-        //Variables locales
         Menu();
     }
 
@@ -55,32 +59,30 @@ public class LoteriaV2 {
 
     public static void CompraBoletosLoteria(){
         double compra=0;
-        int aleatorio;
-
         System.out.println("¿Cuántos boletos quieres comprar?");
         cantidadBoletos = TecladoInt();
 
         BoletosLoteria =new int [cantidadBoletos];
-        if (cartera >=5) {
-            for (int i = 0; i < cantidadBoletos; i++) {
-                aleatorio=(((int)Math.floor(100000*(Math.random())))); //Numeros de 0 a 99.999;
-                BoletosLoteria[i]=aleatorio;
+        compra = cantidadBoletos *3;
+        if (compra <= cartera) {
+            for (int i = 0; i < BoletosLoteria.length; i++) {
+                BoletosLoteria[i]=Aleatorio(11, 5);
                 System.out.print(BoletosLoteria[i]);
                 System.out.println("");
             }
 
-            compra = cartera- (cantidadBoletos*5);
-            cartera = compra;
+            for (int i : BoletosLoteria) {
+                ListaBoletos.add(i);
+            }
+            cartera -= cantidadBoletos*3;
         }
         else
-        System.out.println("Cartera minima de 5$");
+        System.out.println("No tiene dinero suficiente");
     }
 
     public static void ConsultaBoletosLoteria(){
         System.out.println("Sus boletos de loteria son: ");
-        for (int i = 0; i < BoletosLoteria.length; i++) {
-            System.out.println(BoletosLoteria[i]);
-        }
+        System.out.println(ListaBoletos);
     }
 
     public static int TecladoInt(){
@@ -95,5 +97,11 @@ public class LoteriaV2 {
         double numero;
         numero = sc.nextDouble();
         return numero;
+    }
+
+    public static int Aleatorio(int mayor,int menor) {
+        int n = (int)Math.floor((Math.random())*(mayor-menor)+menor);
+        //aleatorio = (int)Math.floor((Math.random())*(10-5)+5); de 5 hasta 9
+        return n;
     }
 }
