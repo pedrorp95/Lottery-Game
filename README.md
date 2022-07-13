@@ -7,6 +7,7 @@ Crea un programa que solicite:
 -Se podrá jugar de forma aleatoria o indicando la apuesta. Para la lotería será al menos un numero de 5 dígitos y para el euromillon, 
  al menos una apuesta cada una con 5 números entre el 1 y el 49 y dos estrellas entre el 1 y el 9.
 -Los resultados se calcularan de forma aleatoria y se comparará con la/s apuestas realizadas para ver el premio.
+
 Categorías Premios lotería:
 -Numero completo  30.000€
 -Anterior y posterior  1.200€
@@ -14,6 +15,7 @@ Categorías Premios lotería:
 -3 ultimas cifras  15€
 -2 ultimas cifras  6€
 -Reintegro  3€
+
 Categorías Premios euromillon:
 
 5 numero y 2 estrellas.  75M – 900 M€

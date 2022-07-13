@@ -5,6 +5,7 @@ public class LoteriaV2 {
     //Variables globales
     static double cartera=0.0;
     static int cantidadBoletos = 0;
+    static int premio;
     static int BoletosLoteria[];
     static ArrayList<Integer> ListaBoletos = new ArrayList<Integer>();
     
@@ -41,6 +42,9 @@ public class LoteriaV2 {
                 case 4:
                     ConsultaBoletosLoteria();
                     break;
+                case 5:
+                    PremioLoteria();
+                    break;
                 default:
                     break;
             }
@@ -66,9 +70,8 @@ public class LoteriaV2 {
         compra = cantidadBoletos *3;
         if (compra <= cartera) {
             for (int i = 0; i < BoletosLoteria.length; i++) {
-                BoletosLoteria[i]=Aleatorio(11, 5);
-                System.out.print(BoletosLoteria[i]);
-                System.out.println("");
+                BoletosLoteria[i]=Aleatorio(100000, 10000);
+                System.out.print(BoletosLoteria[i]+"\n");
             }
 
             for (int i : BoletosLoteria) {
@@ -81,8 +84,60 @@ public class LoteriaV2 {
     }
 
     public static void ConsultaBoletosLoteria(){
-        System.out.println("Sus boletos de loteria son: ");
-        System.out.println(ListaBoletos);
+        System.out.println("Sus boletos de loteria son: \n"+ListaBoletos);
+    }
+
+
+    public static void PremioLoteria(){
+        int aleatorio = Aleatorio(100000, 10000);
+        System.out.println("El número premiado es: ***"+aleatorio+"***");
+        
+        int parse=0;
+        int dinero=0;
+        boolean restapremio = false;
+
+        for (int i = 0; i < ListaBoletos.size(); i++) {
+            parse = ListaBoletos.get(i);
+
+            if (parse%10 == aleatorio%10) {
+                System.out.println("¡Reintegro de 3$!");
+                dinero +=3;
+                restapremio = true;
+            }
+            if (parse%100 == aleatorio%100) {
+                System.out.println("¡Premio de 6$!");
+                dinero +=6;
+                if (restapremio == true) {
+                   dinero -= 3; 
+                }
+            }
+            if (parse%1000 == aleatorio%1000) {
+                System.out.println("¡Premio de 15$!");
+                dinero +=15;
+                if (restapremio == true) {
+                    dinero -= 6; 
+                 }
+            }
+            if (parse%10000 == aleatorio%10000) {
+                System.out.println("¡Premio de 75$!");
+                dinero +=75;
+                if (restapremio == true) {
+                    dinero -= 15; 
+                 }
+            }
+            if (parse%100000 +1 == aleatorio || parse%100000 -1 == aleatorio) {
+                System.out.println("¡Reintegro de 1200$!");
+                dinero +=1200;
+            }
+            if (parse%100000 == aleatorio%100000) {
+                System.out.println("***ENHORABUENA HA CONSEGUIDO EL PREMIO GORDO*** 30.000$");
+                dinero +=30000;
+                if (restapremio == true) {
+                    dinero -= 75; 
+                 }
+            }
+        }
+        System.out.println("Ha ganado un total de: "+dinero+"$");
     }
 
     public static int TecladoInt(){
