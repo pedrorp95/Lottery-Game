@@ -62,15 +62,61 @@ public class LoteriaV2 {
     }
 
     public static void CompraBoletosLoteria(){
+        int manualmente = 1000;
+        int nmanual = 0;
         double compra=0;
         System.out.println("¿Cuántos boletos quieres comprar?");
         cantidadBoletos = TecladoInt();
 
         BoletosLoteria =new int [cantidadBoletos];
         compra = cantidadBoletos *3;
+
+        switch (cantidadBoletos) {
+            default:
+            if (compra > cartera) {
+                System.out.println("No tiene dinero suficiente");
+            }
+                break;
+        }
+
+
         if (compra <= cartera) {
+            do {
+
+                System.out.println("¿Aleatorio (0) o Manualmente (1)?");
+                manualmente = TecladoInt();
+    
+            } while (manualmente != 0 && manualmente != 1);
+        }
+        
+        if (manualmente == 0) { //Forma aleatoria
+            if (compra <= cartera) {
+                for (int i = 0; i < BoletosLoteria.length; i++) {
+                    BoletosLoteria[i]=Aleatorio(100000, 10000);
+                    System.out.print(BoletosLoteria[i]+"\n");
+                }
+    
+                for (int i : BoletosLoteria) {
+                    ListaBoletos.add(i);
+                }
+                cartera -= cantidadBoletos*3;
+            }
+        }
+
+        if (manualmente == 1) { //Forma manual
+
+            int tam = 0;
+            String cadena ="";
+
+            do {
+                System.out.println("Por favor introduzca los 5 dígitos del boleto.");
+                nmanual= TecladoInt();
+                cadena = String.valueOf(nmanual);
+                tam = cadena.length();
+            } while (tam !=5);
+
             for (int i = 0; i < BoletosLoteria.length; i++) {
-                BoletosLoteria[i]=Aleatorio(100000, 10000);
+                BoletosLoteria[i] = nmanual;
                 System.out.print(BoletosLoteria[i]+"\n");
             }
 
@@ -79,8 +125,6 @@ public class LoteriaV2 {
             }
             cartera -= cantidadBoletos*3;
         }
-        else
-        System.out.println("No tiene dinero suficiente");
     }
 
     public static void ConsultaBoletosLoteria(){
