@@ -12,6 +12,7 @@ public class LoteriaV2 {
     static int BoletosEuro[][];
     static int BoletosEuroPremio [] = new int [7];
     static ArrayList<Integer> ListaBoletos = new ArrayList<Integer>();
+    static ArrayList<Integer> ListaBoletosEuro = new ArrayList<Integer>();
     
     
     public static void main(String[] args) {
@@ -28,7 +29,8 @@ public class LoteriaV2 {
             System.out.println("4. Consulta sus boletos Loteria");
             System.out.println("5. Premios de la loteria");
             System.out.println("6. Compra boletos Euromillon");
-            System.out.println("7. Premios Euromillon");
+            System.out.println("7. Consulta sus  boletos Euromillon");
+            System.out.println("8. Premios Euromillon");
             System.out.println("9. Salir");
 
             opcionMenu = TecladoInt();
@@ -53,6 +55,9 @@ public class LoteriaV2 {
                     CompraBoletosEuro();
                     break;
                 case 7:
+                    ConsultaBoletoEuro();
+                    break;
+                case 8:
                     PremiosEuro();
                     break;
             }
@@ -155,32 +160,32 @@ public class LoteriaV2 {
                 dinero +=3;
                 restapremio = true;
             }
-            if (parse%100 == aleatorio%100) {
+            else if (parse%100 == aleatorio%100) {
                 System.out.println("¡Premio de 6$!");
                 dinero +=6;
                 if (restapremio == true) {
                    dinero -= 3; 
                 }
             }
-            if (parse%1000 == aleatorio%1000) {
+            else if (parse%1000 == aleatorio%1000) {
                 System.out.println("¡Premio de 15$!");
                 dinero +=15;
                 if (restapremio == true) {
                     dinero -= 6; 
                  }
             }
-            if (parse%10000 == aleatorio%10000) {
+            else if (parse%10000 == aleatorio%10000) {
                 System.out.println("¡Premio de 75$!");
                 dinero +=75;
                 if (restapremio == true) {
                     dinero -= 15; 
                  }
             }
-            if (parse%100000 +1 == aleatorio || parse%100000 -1 == aleatorio) {
+            else if (parse%100000 +1 == aleatorio || parse%100000 -1 == aleatorio) {
                 System.out.println("¡Reintegro de 1200$!");
                 dinero +=1200;
             }
-            if (parse%100000 == aleatorio%100000) {
+            else if (parse%100000 == aleatorio%100000) {
                 System.out.println("***ENHORABUENA HA CONSEGUIDO EL PREMIO GORDO*** 30.000$");
                 dinero +=30000;
                 if (restapremio == true) {
@@ -234,9 +239,10 @@ public class LoteriaV2 {
                 for (int i = 0; i < cantidadBoletosEuro; i++) {
                     for (int j = 0; j < 7; j++) {
                         System.out.print(BoletosEuro[i][j]+" ");
+                        ListaBoletosEuro.add(BoletosEuro[i][j]);   
                     }
+                    System.out.println("\n");
                 }
-                System.out.println("\n");
                 cartera -= compra;
             }
         }
@@ -278,6 +284,7 @@ public class LoteriaV2 {
                 for (int i = 0; i < cantidadBoletosEuro; i++) {
                     for (int j = 0; j < 7; j++) {
                         System.out.print(BoletosEuro[i][j]+" ");
+                        ListaBoletosEuro.add(BoletosEuro[i][j]); 
                     }
                 }
                 System.out.print("¡Buena Suerte!"+"\n");
@@ -286,10 +293,15 @@ public class LoteriaV2 {
         }
     }
 
+    public static void ConsultaBoletoEuro(){
+        System.out.println(ListaBoletosEuro);
+    }
+
     public static void PremiosEuro(){
         int numeroserie=0;
         int estrellas=0;
         int naleatorio;
+        int dinero=0;
 
         for (int i = 0; i < 5; i++) { //5 primeros numeros del boleto euro
             naleatorio = Aleatorio(50, 1);
@@ -326,62 +338,76 @@ public class LoteriaV2 {
             if (numeroserie <2) {
                 System.out.println("No te ha tocado nada");
             }
+
             else if(numeroserie==2 && estrellas==0){
                 naleatorio=Aleatorio(7, 1);
                 System.out.println("El premio ha sido: "+naleatorio+"💵");
+                dinero +=naleatorio;
                 continue;
             }
+            
             else if(numeroserie==2 && estrellas==1){
                 naleatorio=Aleatorio(8, 4);
                 System.out.println("El premio ha sido: "+naleatorio+"💵");
+                dinero +=naleatorio;
                 continue;
             }
             else if(numeroserie==3 && estrellas==1){
                 naleatorio=Aleatorio(16, 8);
                 System.out.println("El premio ha sido: "+naleatorio+"💵");
+                dinero +=naleatorio;
                 continue;
             }
             else if(numeroserie==2 && estrellas==2){
                 naleatorio=Aleatorio(21, 10);
                 System.out.println("El premio ha sido: "+naleatorio+"💵");
+                dinero +=naleatorio;
                 continue;
             }
             else if(numeroserie==4 && estrellas==0){
                 naleatorio=Aleatorio(61, 20);
                 System.out.println("El premio ha sido: "+naleatorio+"💵");
+                dinero +=naleatorio;
                 continue;
             }
             else if(numeroserie==3 && estrellas==2){
                 naleatorio=Aleatorio(81, 30);
                 System.out.println("El premio ha sido: "+naleatorio+"💵");
+                dinero +=naleatorio;
                 continue;
             }
             else if(numeroserie==4 && estrellas==1){
                 naleatorio=Aleatorio(601, 90);
                 System.out.println("El premio ha sido: "+naleatorio+"💵");
+                dinero +=naleatorio;
                 continue;
             }
             else if(numeroserie==4 && estrellas==2){
                 naleatorio=Aleatorio(6001, 750);
                 System.out.println("El premio ha sido: "+naleatorio+"💵");
+                dinero +=naleatorio;
                 continue;
             }
             else if(numeroserie==5 && estrellas==0){
                 naleatorio=Aleatorio(120001, 80000);
                 System.out.println("El premio ha sido: "+naleatorio+"💵");
+                dinero +=naleatorio;
                 continue;
             }
             else if(numeroserie==5 && estrellas==1){
                 naleatorio=Aleatorio(2000001, 600000);
                 System.out.println("El premio ha sido: "+naleatorio+"💵");
+                dinero +=naleatorio;
                 continue;
             }
             else if(numeroserie==5 && estrellas==2){
                 naleatorio=Aleatorio(900000001, 75000000);
                 System.out.println("El premio ha sido: "+naleatorio+"💵");
+                dinero +=naleatorio;
                 continue;
             }
         }
+        cartera +=dinero;
     }
 
     public static int TecladoInt(){
